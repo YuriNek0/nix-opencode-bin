@@ -16,10 +16,9 @@
       eachSystem = nixpkgs.lib.genAttrs (import systems);
 
       mkOpencode =
-        pkgs:
+        pkgs: pname: data:
         let
           inherit (pkgs) lib stdenv;
-          data = builtins.fromJSON (builtins.readFile ./hashes.json);
           inherit (data) version hashes;
           platform = stdenv.hostPlatform.system;
           assets = {
@@ -43,11 +42,13 @@
           asset = assets.${platform} or (throw "Unsupported system: ${platform}");
         in
         stdenv.mkDerivation {
-          pname = "opencode";
+          inherit pname;
           inherit version;
 
           src = pkgs.fetchurl {
-            url = "https://github.com/anomalyco/opencode/releases/download/v${version}/${asset.name}";
+            url =
+              data.urls.${platform}
+                or "https://github.com/anomalyco/opencode/releases/download/v${version}/${asset.name}";
             hash = hashes.${platform};
           };
 
@@ -73,8 +74,8 @@
 
           installPhase = ''
             runHook preInstall
-            install -Dm755 opencode $out/bin/opencode
-            wrapProgram $out/bin/opencode \
+            install -Dm755 opencode $out/bin/${pname}
+            wrapProgram $out/bin/${pname} \
               --prefix PATH : ${
                 lib.makeBinPath [
                   pkgs.fzf
@@ -86,12 +87,12 @@
 
           meta = {
             description = "AI coding agent built for the terminal";
-            homepage = "https://github.com/anomalyco/opencode";
-            changelog = "https://github.com/anomalyco/opencode/releases/tag/v${version}";
+            homepage =
+              if pname == "opencode-v1" then "https://opencode.ai/docs" else "https://opencode.ai/v2/docs";
             license = lib.licenses.mit;
             sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
             platforms = builtins.attrNames assets;
-            mainProgram = "opencode";
+            mainProgram = pname;
           };
         };
     in
@@ -100,15 +101,22 @@
         system:
         let
           pkgs = import nixpkgs { inherit system; };
-          opencode = mkOpencode pkgs;
+          opencode = mkOpencode pkgs "opencode" (builtins.fromJSON (builtins.readFile ./hashes.json));
+          opencode-v1 = mkOpencode pkgs "opencode-v1" (
+            builtins.fromJSON (builtins.readFile ./hashes-v1.json)
+          );
         in
         {
-          inherit opencode;
+          inherit opencode opencode-v1;
           default = opencode;
         }
       );
 
       apps = eachSystem (system: {
+        opencode-v1 = {
+          type = "app";
+          program = "${self.packages.${system}.opencode-v1}/bin/opencode-v1";
+        };
         opencode = {
           type = "app";
           program = "${self.packages.${system}.opencode}/bin/opencode";

@@ -1,0 +1,9 @@
+{
+  "hashes": {
+    "aarch64-darwin": "sha256-HJ2hELvz4TxIDgouVfYbCevbM8/GcCm2H/u5+FZtZ80=",
+    "aarch64-linux": "sha256-P3OkdAZbS3xKZM7yOVphI64QOcLkHwrL4prmUhtQ32Y=",
+    "x86_64-darwin": "sha256-nfehx1UqlXO5VWq5wesrPKxGs4DiUQaj2JuexmL0QZQ=",
+    "x86_64-linux": "sha256-Tv+NLPhhTq2X6t8RI9RgM9yXXq3qw98EZEpkuuD56Bk="
+  },
+  "version": "1.19.2"
+}

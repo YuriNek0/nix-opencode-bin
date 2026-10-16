@@ -25,7 +25,12 @@ jobs:
       - name: Check for a new OpenCode release
         run: nix develop -c python3 update.py
       - name: Validate flake
-        run: nix flake check --no-build
+        run: |
+          nix develop -c python3 -m unittest discover -s tests
+          nix flake check --all-systems --no-build
+          nix build .#opencode .#opencode-v1
+          nix run .#opencode -- --version
+          nix run .#opencode-v1 -- --version
       - name: Push changes to main
         run: |
           if git diff --quiet; then
@@ -33,6 +38,6 @@ jobs:
             exit 0
           fi
 
-          git add flake.lock hashes.json
+          git add flake.lock hashes.json hashes-v1.json
           git commit -m "opencode: update release and flake inputs"
           git push origin HEAD:main
