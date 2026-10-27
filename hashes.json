@@ -1,15 +1,15 @@
 {
   "hashes": {
-    "aarch64-darwin": "sha256-+e3B3e0IDjmqYduUJwpRr2Z3KsVyvn1rFfpvhyUaPf8=",
-    "aarch64-linux": "sha256-dZydbnska4G8yT38bMO7KjgofHW2IC4wXqystd2IIxU=",
-    "x86_64-darwin": "sha256-fzUmW2kAznWwHgPKskl2IgJrQCwCHs9ubmh1WHQkWms=",
-    "x86_64-linux": "sha256-Ltr4z5boHexe6ZajGWsDNFz1nloWc9g6RZm7SvxcX20="
+    "aarch64-darwin": "sha256-xxsc2WVBU5rTjip1N30vQ9KidWcomhQ3GhgumggA2z0=",
+    "aarch64-linux": "sha256-Hxzg/Ae5JFqBX/qdZS27gOaw8H5b906ofSscAzn7rFI=",
+    "x86_64-darwin": "sha256-zBkaHOybnNAZLXjcBmu/SHMGORMUIvpUyHxIWoIbodU=",
+    "x86_64-linux": "sha256-bVl5cKjMRI8bmp9kVTJYSzOd06uVg7tfBj8T2D5Udo8="
   },
   "urls": {
-    "aarch64-darwin": "https://opencode.ai/files/bin/2.1.4/opencode-darwin-arm64.zip",
-    "aarch64-linux": "https://opencode.ai/files/bin/2.1.4/opencode-linux-arm64.tar.gz",
-    "x86_64-darwin": "https://opencode.ai/files/bin/2.1.4/opencode-darwin-x64.zip",
-    "x86_64-linux": "https://opencode.ai/files/bin/2.1.4/opencode-linux-x64.tar.gz"
+    "aarch64-darwin": "https://opencode.ai/files/bin/2.2.0/opencode-darwin-arm64.zip",
+    "aarch64-linux": "https://opencode.ai/files/bin/2.2.0/opencode-linux-arm64.tar.gz",
+    "x86_64-darwin": "https://opencode.ai/files/bin/2.2.0/opencode-darwin-x64.zip",
+    "x86_64-linux": "https://opencode.ai/files/bin/2.2.0/opencode-linux-x64.tar.gz"
   },
-  "version": "2.1.4"
+  "version": "2.2.0"
 }
